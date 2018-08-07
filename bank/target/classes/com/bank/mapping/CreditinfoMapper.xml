@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bank.dao.CreditinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bank.pojo.Creditinfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="CreditId" property="creditid" jdbcType="INTEGER" />
+    <result column="Credit_pwd" property="creditPwd" jdbcType="VARCHAR" />
+    <result column="Account_id" property="accountId" jdbcType="INTEGER" />
+    <result column="Credit_state" property="creditState" jdbcType="VARCHAR" />
+    <result column="Credit_time" property="creditTime" jdbcType="TIMESTAMP" />
+    <result column="Credit_money" property="creditMoney" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, CreditId, Credit_pwd, Account_id, Credit_state, Credit_time, Credit_money
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_creditinfo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_creditinfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bank.pojo.Creditinfo" >
+    insert into sys_creditinfo (id, CreditId, Credit_pwd, 
+      Account_id, Credit_state, Credit_time, 
+      Credit_money)
+    values (#{id,jdbcType=INTEGER}, #{creditid,jdbcType=INTEGER}, #{creditPwd,jdbcType=VARCHAR}, 
+      #{accountId,jdbcType=INTEGER}, #{creditState,jdbcType=VARCHAR}, #{creditTime,jdbcType=TIMESTAMP}, 
+      #{creditMoney,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bank.pojo.Creditinfo" >
+    insert into sys_creditinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="creditid != null" >
+        CreditId,
+      </if>
+      <if test="creditPwd != null" >
+        Credit_pwd,
+      </if>
+      <if test="accountId != null" >
+        Account_id,
+      </if>
+      <if test="creditState != null" >
+        Credit_state,
+      </if>
+      <if test="creditTime != null" >
+        Credit_time,
+      </if>
+      <if test="creditMoney != null" >
+        Credit_money,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="creditid != null" >
+        #{creditid,jdbcType=INTEGER},
+      </if>
+      <if test="creditPwd != null" >
+        #{creditPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="accountId != null" >
+        #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="creditState != null" >
+        #{creditState,jdbcType=VARCHAR},
+      </if>
+      <if test="creditTime != null" >
+        #{creditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creditMoney != null" >
+        #{creditMoney,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bank.pojo.Creditinfo" >
+    update sys_creditinfo
+    <set >
+      <if test="creditid != null" >
+        CreditId = #{creditid,jdbcType=INTEGER},
+      </if>
+      <if test="creditPwd != null" >
+        Credit_pwd = #{creditPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="accountId != null" >
+        Account_id = #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="creditState != null" >
+        Credit_state = #{creditState,jdbcType=VARCHAR},
+      </if>
+      <if test="creditTime != null" >
+        Credit_time = #{creditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creditMoney != null" >
+        Credit_money = #{creditMoney,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bank.pojo.Creditinfo" >
+    update sys_creditinfo
+    set CreditId = #{creditid,jdbcType=INTEGER},
+      Credit_pwd = #{creditPwd,jdbcType=VARCHAR},
+      Account_id = #{accountId,jdbcType=INTEGER},
+      Credit_state = #{creditState,jdbcType=VARCHAR},
+      Credit_time = #{creditTime,jdbcType=TIMESTAMP},
+      Credit_money = #{creditMoney,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

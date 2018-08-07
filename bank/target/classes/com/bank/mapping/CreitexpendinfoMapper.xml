@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bank.dao.CreitexpendinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bank.pojo.Creitexpendinfo" >
+    <id column="CreditExpend_id" property="creditexpendId" jdbcType="INTEGER" />
+    <result column="CreditId" property="creditid" jdbcType="INTEGER" />
+    <result column="CreitExpend_money" property="creitexpendMoney" jdbcType="DECIMAL" />
+    <result column="CreitExpend_time" property="creitexpendTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    CreditExpend_id, CreditId, CreitExpend_money, CreitExpend_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_creitexpendinfo
+    where CreditExpend_id = #{creditexpendId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_creitexpendinfo
+    where CreditExpend_id = #{creditexpendId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bank.pojo.Creitexpendinfo" >
+    insert into sys_creitexpendinfo (CreditExpend_id, CreditId, CreitExpend_money, 
+      CreitExpend_time)
+    values (#{creditexpendId,jdbcType=INTEGER}, #{creditid,jdbcType=INTEGER}, #{creitexpendMoney,jdbcType=DECIMAL}, 
+      #{creitexpendTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bank.pojo.Creitexpendinfo" >
+    insert into sys_creitexpendinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="creditexpendId != null" >
+        CreditExpend_id,
+      </if>
+      <if test="creditid != null" >
+        CreditId,
+      </if>
+      <if test="creitexpendMoney != null" >
+        CreitExpend_money,
+      </if>
+      <if test="creitexpendTime != null" >
+        CreitExpend_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="creditexpendId != null" >
+        #{creditexpendId,jdbcType=INTEGER},
+      </if>
+      <if test="creditid != null" >
+        #{creditid,jdbcType=INTEGER},
+      </if>
+      <if test="creitexpendMoney != null" >
+        #{creitexpendMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="creitexpendTime != null" >
+        #{creitexpendTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bank.pojo.Creitexpendinfo" >
+    update sys_creitexpendinfo
+    <set >
+      <if test="creditid != null" >
+        CreditId = #{creditid,jdbcType=INTEGER},
+      </if>
+      <if test="creitexpendMoney != null" >
+        CreitExpend_money = #{creitexpendMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="creitexpendTime != null" >
+        CreitExpend_time = #{creitexpendTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where CreditExpend_id = #{creditexpendId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bank.pojo.Creitexpendinfo" >
+    update sys_creitexpendinfo
+    set CreditId = #{creditid,jdbcType=INTEGER},
+      CreitExpend_money = #{creitexpendMoney,jdbcType=DECIMAL},
+      CreitExpend_time = #{creitexpendTime,jdbcType=TIMESTAMP}
+    where CreditExpend_id = #{creditexpendId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bank.dao.CardinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bank.pojo.Cardinfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="CardId" property="cardid" jdbcType="INTEGER" />
+    <result column="Card_pwd" property="cardPwd" jdbcType="VARCHAR" />
+    <result column="Account_id" property="accountId" jdbcType="INTEGER" />
+    <result column="Card_state" property="cardState" jdbcType="TIMESTAMP" />
+    <result column="Card_money" property="cardMoney" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, CardId, Card_pwd, Account_id, Card_state, Card_money
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_cardinfo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_cardinfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bank.pojo.Cardinfo" >
+    insert into sys_cardinfo (id, CardId, Card_pwd, 
+      Account_id, Card_state, Card_money
+      )
+    values (#{id,jdbcType=INTEGER}, #{cardid,jdbcType=INTEGER}, #{cardPwd,jdbcType=VARCHAR}, 
+      #{accountId,jdbcType=INTEGER}, #{cardState,jdbcType=TIMESTAMP}, #{cardMoney,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bank.pojo.Cardinfo" >
+    insert into sys_cardinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="cardid != null" >
+        CardId,
+      </if>
+      <if test="cardPwd != null" >
+        Card_pwd,
+      </if>
+      <if test="accountId != null" >
+        Account_id,
+      </if>
+      <if test="cardState != null" >
+        Card_state,
+      </if>
+      <if test="cardMoney != null" >
+        Card_money,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="cardid != null" >
+        #{cardid,jdbcType=INTEGER},
+      </if>
+      <if test="cardPwd != null" >
+        #{cardPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="accountId != null" >
+        #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="cardState != null" >
+        #{cardState,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cardMoney != null" >
+        #{cardMoney,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bank.pojo.Cardinfo" >
+    update sys_cardinfo
+    <set >
+      <if test="cardid != null" >
+        CardId = #{cardid,jdbcType=INTEGER},
+      </if>
+      <if test="cardPwd != null" >
+        Card_pwd = #{cardPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="accountId != null" >
+        Account_id = #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="cardState != null" >
+        Card_state = #{cardState,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cardMoney != null" >
+        Card_money = #{cardMoney,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bank.pojo.Cardinfo" >
+    update sys_cardinfo
+    set CardId = #{cardid,jdbcType=INTEGER},
+      Card_pwd = #{cardPwd,jdbcType=VARCHAR},
+      Account_id = #{accountId,jdbcType=INTEGER},
+      Card_state = #{cardState,jdbcType=TIMESTAMP},
+      Card_money = #{cardMoney,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

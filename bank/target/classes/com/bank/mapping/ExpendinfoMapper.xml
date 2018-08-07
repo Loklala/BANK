@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bank.dao.ExpendinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bank.pojo.Expendinfo" >
+    <id column="Expend_id" property="expendId" jdbcType="INTEGER" />
+    <result column="CardId" property="cardid" jdbcType="INTEGER" />
+    <result column="Expend_money" property="expendMoney" jdbcType="DECIMAL" />
+    <result column="Expend_time" property="expendTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Expend_id, CardId, Expend_money, Expend_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_expendinfo
+    where Expend_id = #{expendId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_expendinfo
+    where Expend_id = #{expendId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bank.pojo.Expendinfo" >
+    insert into sys_expendinfo (Expend_id, CardId, Expend_money, 
+      Expend_time)
+    values (#{expendId,jdbcType=INTEGER}, #{cardid,jdbcType=INTEGER}, #{expendMoney,jdbcType=DECIMAL}, 
+      #{expendTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bank.pojo.Expendinfo" >
+    insert into sys_expendinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="expendId != null" >
+        Expend_id,
+      </if>
+      <if test="cardid != null" >
+        CardId,
+      </if>
+      <if test="expendMoney != null" >
+        Expend_money,
+      </if>
+      <if test="expendTime != null" >
+        Expend_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="expendId != null" >
+        #{expendId,jdbcType=INTEGER},
+      </if>
+      <if test="cardid != null" >
+        #{cardid,jdbcType=INTEGER},
+      </if>
+      <if test="expendMoney != null" >
+        #{expendMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="expendTime != null" >
+        #{expendTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bank.pojo.Expendinfo" >
+    update sys_expendinfo
+    <set >
+      <if test="cardid != null" >
+        CardId = #{cardid,jdbcType=INTEGER},
+      </if>
+      <if test="expendMoney != null" >
+        Expend_money = #{expendMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="expendTime != null" >
+        Expend_time = #{expendTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where Expend_id = #{expendId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bank.pojo.Expendinfo" >
+    update sys_expendinfo
+    set CardId = #{cardid,jdbcType=INTEGER},
+      Expend_money = #{expendMoney,jdbcType=DECIMAL},
+      Expend_time = #{expendTime,jdbcType=TIMESTAMP}
+    where Expend_id = #{expendId,jdbcType=INTEGER}
+  </update>
+</mapper>

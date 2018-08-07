@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bank.dao.CreditincomeinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bank.pojo.Creditincomeinfo" >
+    <id column="CreditIncome_id" property="creditincomeId" jdbcType="INTEGER" />
+    <result column="CreditId" property="creditid" jdbcType="INTEGER" />
+    <result column="CreditIncome_money" property="creditincomeMoney" jdbcType="DECIMAL" />
+    <result column="CreditIncome_time" property="creditincomeTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    CreditIncome_id, CreditId, CreditIncome_money, CreditIncome_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_creditincomeinfo
+    where CreditIncome_id = #{creditincomeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_creditincomeinfo
+    where CreditIncome_id = #{creditincomeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bank.pojo.Creditincomeinfo" >
+    insert into sys_creditincomeinfo (CreditIncome_id, CreditId, CreditIncome_money, 
+      CreditIncome_time)
+    values (#{creditincomeId,jdbcType=INTEGER}, #{creditid,jdbcType=INTEGER}, #{creditincomeMoney,jdbcType=DECIMAL}, 
+      #{creditincomeTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bank.pojo.Creditincomeinfo" >
+    insert into sys_creditincomeinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="creditincomeId != null" >
+        CreditIncome_id,
+      </if>
+      <if test="creditid != null" >
+        CreditId,
+      </if>
+      <if test="creditincomeMoney != null" >
+        CreditIncome_money,
+      </if>
+      <if test="creditincomeTime != null" >
+        CreditIncome_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="creditincomeId != null" >
+        #{creditincomeId,jdbcType=INTEGER},
+      </if>
+      <if test="creditid != null" >
+        #{creditid,jdbcType=INTEGER},
+      </if>
+      <if test="creditincomeMoney != null" >
+        #{creditincomeMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="creditincomeTime != null" >
+        #{creditincomeTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bank.pojo.Creditincomeinfo" >
+    update sys_creditincomeinfo
+    <set >
+      <if test="creditid != null" >
+        CreditId = #{creditid,jdbcType=INTEGER},
+      </if>
+      <if test="creditincomeMoney != null" >
+        CreditIncome_money = #{creditincomeMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="creditincomeTime != null" >
+        CreditIncome_time = #{creditincomeTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where CreditIncome_id = #{creditincomeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bank.pojo.Creditincomeinfo" >
+    update sys_creditincomeinfo
+    set CreditId = #{creditid,jdbcType=INTEGER},
+      CreditIncome_money = #{creditincomeMoney,jdbcType=DECIMAL},
+      CreditIncome_time = #{creditincomeTime,jdbcType=TIMESTAMP}
+    where CreditIncome_id = #{creditincomeId,jdbcType=INTEGER}
+  </update>
+</mapper>

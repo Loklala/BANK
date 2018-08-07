@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bank.dao.AccountInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bank.pojo.AccountInfo" >
+    <id column="Account_id" property="accountId" jdbcType="INTEGER" />
+    <result column="Account_name" property="accountName" jdbcType="VARCHAR" />
+    <result column="Account_password" property="accountPassword" jdbcType="VARCHAR" />
+    <result column="Account_nickname" property="accountNickname" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="getAccount" resultType="AccountType">
+  
+  select 
+    <include refid="Base_Column_List" />
+    from sys_accountinfo where Account_name=#{Account_name} And Account_password=#{Account_password}
+  
+  </select>
+  <sql id="Base_Column_List" >
+    Account_id, Account_name, Account_password, Account_nickname
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_accountinfo
+    where Account_id = #{accountId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_accountinfo
+    where Account_id = #{accountId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bank.pojo.AccountInfo" >
+    insert into sys_accountinfo (Account_id, Account_name, Account_password, 
+      Account_nickname)
+    values (#{accountId,jdbcType=INTEGER}, #{accountName,jdbcType=VARCHAR}, #{accountPassword,jdbcType=VARCHAR}, 
+      #{accountNickname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bank.pojo.AccountInfo" >
+    insert into sys_accountinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="accountId != null" >
+        Account_id,
+      </if>
+      <if test="accountName != null" >
+        Account_name,
+      </if>
+      <if test="accountPassword != null" >
+        Account_password,
+      </if>
+      <if test="accountNickname != null" >
+        Account_nickname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="accountId != null" >
+        #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="accountName != null" >
+        #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="accountPassword != null" >
+        #{accountPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="accountNickname != null" >
+        #{accountNickname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bank.pojo.AccountInfo" >
+    update sys_accountinfo
+    <set >
+      <if test="accountName != null" >
+        Account_name = #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="accountPassword != null" >
+        Account_password = #{accountPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="accountNickname != null" >
+        Account_nickname = #{accountNickname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Account_id = #{accountId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bank.pojo.AccountInfo" >
+    update sys_accountinfo
+    set Account_name = #{accountName,jdbcType=VARCHAR},
+      Account_password = #{accountPassword,jdbcType=VARCHAR},
+      Account_nickname = #{accountNickname,jdbcType=VARCHAR}
+    where Account_id = #{accountId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bank.dao.UserinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bank.pojo.Userinfo" >
+    <id column="User_id" property="userId" jdbcType="INTEGER" />
+    <result column="Account_id" property="accountId" jdbcType="INTEGER" />
+    <result column="User_name" property="userName" jdbcType="VARCHAR" />
+    <result column="User_cardid" property="userCardid" jdbcType="VARCHAR" />
+    <result column="User_sex" property="userSex" jdbcType="DECIMAL" />
+    <result column="Create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="Areaname" property="areaname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    User_id, Account_id, User_name, User_cardid, User_sex, Create_time, Areaname
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_userinfo
+    where User_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_userinfo
+    where User_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bank.pojo.Userinfo" >
+    insert into sys_userinfo (User_id, Account_id, User_name, 
+      User_cardid, User_sex, Create_time, 
+      Areaname)
+    values (#{userId,jdbcType=INTEGER}, #{accountId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{userCardid,jdbcType=VARCHAR}, #{userSex,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{areaname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bank.pojo.Userinfo" >
+    insert into sys_userinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        User_id,
+      </if>
+      <if test="accountId != null" >
+        Account_id,
+      </if>
+      <if test="userName != null" >
+        User_name,
+      </if>
+      <if test="userCardid != null" >
+        User_cardid,
+      </if>
+      <if test="userSex != null" >
+        User_sex,
+      </if>
+      <if test="createTime != null" >
+        Create_time,
+      </if>
+      <if test="areaname != null" >
+        Areaname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="accountId != null" >
+        #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userCardid != null" >
+        #{userCardid,jdbcType=VARCHAR},
+      </if>
+      <if test="userSex != null" >
+        #{userSex,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="areaname != null" >
+        #{areaname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bank.pojo.Userinfo" >
+    update sys_userinfo
+    <set >
+      <if test="accountId != null" >
+        Account_id = #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        User_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userCardid != null" >
+        User_cardid = #{userCardid,jdbcType=VARCHAR},
+      </if>
+      <if test="userSex != null" >
+        User_sex = #{userSex,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        Create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="areaname != null" >
+        Areaname = #{areaname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where User_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bank.pojo.Userinfo" >
+    update sys_userinfo
+    set Account_id = #{accountId,jdbcType=INTEGER},
+      User_name = #{userName,jdbcType=VARCHAR},
+      User_cardid = #{userCardid,jdbcType=VARCHAR},
+      User_sex = #{userSex,jdbcType=DECIMAL},
+      Create_time = #{createTime,jdbcType=TIMESTAMP},
+      Areaname = #{areaname,jdbcType=VARCHAR}
+    where User_id = #{userId,jdbcType=INTEGER}
+  </update>
+</mapper>
